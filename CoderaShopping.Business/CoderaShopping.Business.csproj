@@ -76,6 +76,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category\CategoryMapper.cs" />
+    <Compile Include="Category\CategoryModels.cs" />
+    <Compile Include="Category\CategoryService.cs" />
     <Compile Include="FluentValidationConfig.cs" />
     <Compile Include="LookupViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

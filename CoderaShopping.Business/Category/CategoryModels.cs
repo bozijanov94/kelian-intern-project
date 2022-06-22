@@ -1,0 +1,4 @@
+﻿namespace CoderaShopping.Business.Models
+{
+
+}
