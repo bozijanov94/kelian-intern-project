@@ -81,6 +81,9 @@
     <Compile Include="Category\CategoryService.cs" />
     <Compile Include="FluentValidationConfig.cs" />
     <Compile Include="LookupViewModel.cs" />
+    <Compile Include="Product\ProductMapper.cs" />
+    <Compile Include="Product\ProductModels.cs" />
+    <Compile Include="Product\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\UserMapper.cs" />
     <Compile Include="User\UserModels.cs" />
