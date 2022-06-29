@@ -2,7 +2,7 @@
 
     this.getAll = function () {
         return $http.get(SERVER_URL + "categories/getAll");
-    }
+    } 
 
     this.createCategory = function (model) {
         return $http({

@@ -6,4 +6,4 @@
     "ui.date"
 ]);
 
-app.constant("SERVER_URL", "http://codera-shopping.com/");
+app.constant("SERVER_URL", "http://www.codera-shopping.com/");
