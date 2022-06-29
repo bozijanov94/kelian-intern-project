@@ -1,8 +1,15 @@
 ﻿app.service("categoryService", function ($http, SERVER_URL) {
 
     this.getAll = function () {
-        var result = $http.get(SERVER_URL + "categories/getAll");
-        return result;
+        return $http.get(SERVER_URL + "categories/getAll");
+    }
+
+    this.createCategory = function (model) {
+        return $http({
+            method: "post",
+            url: SERVER_URL + "categories/create",
+            data: model
+        });
     }
 
 })

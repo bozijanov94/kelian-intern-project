@@ -1,3 +1,14 @@
 ﻿<div ng-repeat="category in categories">
     <span>{{ category.Name }}</span>
 </div>
+
+
+<div ng-if="newCategoryModel">
+    <span>{{ newCategoryModel.Name }}</span>
+</div>
+
+<div ng-if="errorMessage">
+    <span>{{ errorMessage }}</span>
+</div>
+
+<button (click)="addCategory(category)">Add new category</button>
