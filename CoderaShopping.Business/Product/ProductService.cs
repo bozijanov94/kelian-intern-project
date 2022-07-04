@@ -56,18 +56,20 @@ namespace CoderaShopping.Business.Services
 
         public ProductViewModel Create(ProductCreateViewModel model)
         {
-            var domainProduct = new Product(model.Name, model.Description);
+            //var domainProduct = new Product(model.Name, model.Description);
 
-            _unitOfWork.BeginTransaction();
+            //_unitOfWork.BeginTransaction();
 
-            if (_productRepository.IsUnique(domainProduct))
-            {
-                _productRepository.Add(domainProduct);
-            }
+            //if (_productRepository.IsUnique(domainProduct))
+            //{
+            //    _productRepository.Add(domainProduct);
+            //}
 
-            _unitOfWork.Commit();
+            //_unitOfWork.Commit();
 
-            return domainProduct.MapToViewModel();
+            //return domainProduct.MapToViewModel();
+
+            return new ProductViewModel();
         }
 
         public ProductViewModel Delete(Guid id)

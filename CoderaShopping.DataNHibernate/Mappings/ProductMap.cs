@@ -18,6 +18,11 @@ namespace CoderaShopping.DataNHibernate.Mappings
                 .Column("Description")
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Not.Nullable();
+
+            References(x => x.Category)
+                .Column("CategoryId")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Not.Nullable();
         }
     }
 }

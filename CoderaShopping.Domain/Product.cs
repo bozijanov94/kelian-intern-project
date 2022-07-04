@@ -11,12 +11,14 @@ namespace CoderaShopping.Domain
         private Guid _id;
         private string _name;
         private string _description;
+        private Category _category;
 
         protected Product() { }
-        public Product(string name, string description)
+        public Product(string name, string description, Category category)
         {
             _name = name;
             _description = description;
+            _category = category;
         }
 
         public virtual Guid Id
@@ -35,6 +37,12 @@ namespace CoderaShopping.Domain
         {
             get { return _description; }
             set { _description = value; }
+        }
+
+        public virtual Category Category
+        {
+            get { return _category; }
+            set { _category = value; }
         }
     }
 }

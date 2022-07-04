@@ -10,8 +10,13 @@ namespace CoderaShopping.Domain
     {
         private Guid _id;
         private string _name;
+        private IList<Product> _products;
 
-        protected Category() { }
+        protected Category()
+        {
+            _products = new List<Product>();
+        }
+
         public Category(string name)
         {
             _name = name;
@@ -27,6 +32,12 @@ namespace CoderaShopping.Domain
         {
             get { return _name; }
             set { _name = value; }
+        }
+
+        public virtual IList<Product> Products
+        {
+            get { return _products; }
+            set { _products = value; }
         }
     }
 }
