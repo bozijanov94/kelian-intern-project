@@ -63,11 +63,17 @@ namespace CoderaShopping.Business.Services
             if (_categoryRepository.IsUnique(domainCategory))
             {
                 _categoryRepository.Add(domainCategory);
+
+                _unitOfWork.Commit();
+
+                return domainCategory.MapToViewModel();
             }
+            else
+            {
+                _unitOfWork.Rollback();
 
-            _unitOfWork.Commit();
-
-            return domainCategory.MapToViewModel();
+                throw new Exception("Category already exists!");
+            }
         }
 
         public CategoryViewModel Delete(Guid id)

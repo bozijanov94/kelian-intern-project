@@ -8,6 +8,13 @@
                 controller: "categoriesCtrl"
         });
 
+    $stateProvider.state('products',
+        {
+            url: "/products",
+            templateUrl: "/app/templates/products.html",
+            controller: "productsCtrl"
+        });
+
     $stateProvider.state('users',
         {
             url: "/users",

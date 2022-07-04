@@ -169,10 +169,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\controllers\productsController.js" />
     <Content Include="app\controllers\categoriesController.js" />
     <Content Include="app\controllers\usersController.js" />
     <Content Include="app\routes.js" />
+    <Content Include="app\services\productsService.js" />
     <Content Include="app\services\categoriesService.js" />
+    <Content Include="app\templates\products.html" />
     <Content Include="app\templates\categories.html" />
     <Content Include="app\templates\users.html" />
     <Content Include="Content\bootstrap.css" />

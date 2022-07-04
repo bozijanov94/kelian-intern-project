@@ -12,4 +12,12 @@
         });
     }
 
+    this.deleteCategory = function (id) {
+        return $http({
+            method: "post",
+            url: SERVER_URL + "categories/delete",
+            data: id
+        });
+    }
+
 })

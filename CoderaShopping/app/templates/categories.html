@@ -11,4 +11,8 @@
     <span>{{ errorMessage }}</span>
 </div>
 
-<button (click)="addCategory(category)">Add new category</button>
+<form action="/" method="post"></form>
+
+<button type="button" ng-click="addCategory(category)">Add new category</button>
+
+<button type="button" ng-click="removeCategory(id)">Delete Category</button>
