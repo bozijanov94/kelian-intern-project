@@ -1,0 +1,22 @@
+﻿<form name="categoryForm">
+    <div class="modal-header">
+        <h3>{{ modalState }}</h3>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <span>Name: <span class="text-danger">*</span></span>
+                <br />
+                <input type="text" ng-modal="category.Name" name="name" required />
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="col-lg-12">
+            <button class="btn btn-primary" ng-click="submit(categoryForm)"> Submit </button>
+            <button class="btn btn-secondary" ng-click="cancel()"> Cancel </button>
+        </div>
+    </div>
+</form>

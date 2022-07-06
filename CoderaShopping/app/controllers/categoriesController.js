@@ -1,8 +1,8 @@
 ﻿app.controller("categoriesCtrl",
-    function ($scope, categoryService) {
+    function ($scope, categoryService, $uibModal) {
 
         $scope.categories = [];
-        
+
         $scope.loadCategories = function () {
             var $result = categoryService.getAll();
             $result.then(function (result) {
@@ -11,23 +11,6 @@
         }
 
         $scope.loadCategories();
-
-        $scope.category = {
-            Name: "Test example"
-        };
-
-        $scope.id = {
-            Id: "85d715ab-2a6c-4561-b9c5-fd7077f39244"
-        };
-
-        $scope.addCategory = function (newCategory) {
-            categoryService.createCategory(newCategory)
-                .then(function (result) {
-                    $scope.newCategoryModel = result.data;
-                }, (function (error) {
-                    $scope.errorMessage = error.data;
-                }))
-        }
 
         $scope.removeCategory = function (id) {
             categoryService.deleteCategory(id)
@@ -38,12 +21,27 @@
                 }))
         }
 
-        $scope.alterCategory = function (changedCategory) {
-            categoryService.updateCategory(changedCategory)
-                .then(function (result) {
-                    $scope.changedCategoryModel = result.data;
-                }, (function (error) {
-                    $scope.errorMessage = error.data;
-                }))
+        $scope.addCategory = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: './app/templates/modalTemplates/add-edit-category.html',
+                controller: 'AddEditCategoryCtrl',
+                resolve: {
+                    categoryId: function () {
+                        return null;
+                    }
+                }
+            });
+
+            modalInstance.result
+                .then(function (response) {
+                    if (response) {
+                        //refresh the data in the table
+                    }
+                },
+                    function rejection(error) {
+                        return error;
+                    });
         }
+
+
     });

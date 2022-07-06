@@ -28,4 +28,11 @@
         });
     }
 
+    this.getById = function (id) {
+        return $http({
+            method: "post",
+            url: SERVER_URL + "categories/getbyid",
+            data: id
+        });
+    }
 })
