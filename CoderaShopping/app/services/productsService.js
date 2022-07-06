@@ -12,4 +12,20 @@
         });
     }
 
+    this.deleteProduct = function (id) {
+        return $http({
+            method: "post",
+            url: SERVER_URL + "products/delete",
+            data: id
+        });
+    }
+
+    this.updateProduct = function (model) {
+        return $http({
+            method: "post",
+            url: SERVER_URL + "products/update",
+            data: model
+        });
+    }
+
 })

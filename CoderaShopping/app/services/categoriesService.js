@@ -20,4 +20,12 @@
         });
     }
 
+    this.updateCategory = function (model) {
+        return $http({
+            method: "post",
+            url: SERVER_URL + "categories/update",
+            data: model
+        });
+    }
+
 })

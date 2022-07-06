@@ -30,8 +30,6 @@ namespace CoderaShopping.Business.Services
             _unitOfWork = unitOfWork;
         }
 
-
-
         public List<CategoryViewModel> GetAll()
         {
             _unitOfWork.BeginTransaction();

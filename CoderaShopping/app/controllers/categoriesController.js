@@ -37,4 +37,13 @@
                     $scope.errorMessage = error.data;
                 }))
         }
+
+        $scope.alterCategory = function (changedCategory) {
+            categoryService.updateCategory(changedCategory)
+                .then(function (result) {
+                    $scope.changedCategoryModel = result.data;
+                }, (function (error) {
+                    $scope.errorMessage = error.data;
+                }))
+        }
     });

@@ -21,16 +21,17 @@ namespace CoderaShopping.Business.Services
     public class ProductService : IProductService
     {
 
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IProductRepository _productRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductService(IProductRepository productRepository, IUnitOfWork unitOfWork)
+        public ProductService(IProductRepository productRepository, IUnitOfWork unitOfWork, 
+            ICategoryRepository categoryRepository)
         {
             _productRepository = productRepository;
             _unitOfWork = unitOfWork;
+            _categoryRepository = categoryRepository;
         }
-
-
 
         public List<ProductViewModel> GetAll()
         {
@@ -56,20 +57,20 @@ namespace CoderaShopping.Business.Services
 
         public ProductViewModel Create(ProductCreateViewModel model)
         {
-            //var domainProduct = new Product(model.Name, model.Description);
+            _unitOfWork.BeginTransaction();
 
-            //_unitOfWork.BeginTransaction();
+            var category = _categoryRepository.GetById(model.Category.Id);
 
-            //if (_productRepository.IsUnique(domainProduct))
-            //{
-            //    _productRepository.Add(domainProduct);
-            //}
+            var domainProduct = new Product(model.Name, model.Description, category);
 
-            //_unitOfWork.Commit();
+            if (_productRepository.IsUnique(domainProduct))
+            {
+                _productRepository.Add(domainProduct);
+            }
 
-            //return domainProduct.MapToViewModel();
+            _unitOfWork.Commit();
 
-            return new ProductViewModel();
+            return domainProduct.MapToViewModel();
         }
 
         public ProductViewModel Delete(Guid id)

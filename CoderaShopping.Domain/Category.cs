@@ -17,7 +17,7 @@ namespace CoderaShopping.Domain
             _products = new List<Product>();
         }
 
-        public Category(string name)
+        public Category(string name) : this()
         {
             _name = name;
         }
