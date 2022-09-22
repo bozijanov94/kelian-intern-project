@@ -160,6 +160,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Api\ProductsController.cs" />
     <Compile Include="Controllers\Api\CategoriesController.cs" />
+    <Compile Include="Controllers\Api\OrdersController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -169,23 +170,55 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\controllers\modalControllers\add-edit-order-controller.js" />
+    <Content Include="app\controllers\modalControllers\add-edit-user-controller.js" />
+    <Content Include="app\controllers\modalControllers\description-product-controller.js" />
+    <Content Include="app\controllers\modalControllers\add-edit-product-controller.js" />
     <Content Include="app\controllers\modalControllers\add-edit-category-controller.js" />
     <Content Include="app\controllers\productsController.js" />
     <Content Include="app\controllers\categoriesController.js" />
+    <Content Include="app\controllers\ordersController.js" />
     <Content Include="app\controllers\usersController.js" />
+    <Content Include="app\directives\amount-picker-directive.js" />
+    <Content Include="app\directives\amount-picker.html" />
+    <Content Include="app\directives\product.html" />
+    <Content Include="app\directives\product-directive.js" />
+    <Content Include="app\directives\customer.html" />
+    <Content Include="app\directives\customer-directive.js" />
+    <Content Include="app\directives\default.html" />
+    <Content Include="app\directives\default-directive.js" />
+    <Content Include="app\directives\userType.html" />
+    <Content Include="app\directives\user-type-directive.js" />
+    <Content Include="app\directives\status-directive.js" />
+    <Content Include="app\directives\status.html" />
+    <Content Include="app\directives\delete.html" />
+    <Content Include="app\directives\delete-directive.js" />
+    <Content Include="app\directives\category-directive.js" />
+    <Content Include="app\directives\category.html" />
     <Content Include="app\routes.js" />
+    <Content Include="app\services\ordersService.js" />
+    <Content Include="app\services\usersService.js" />
     <Content Include="app\services\productsService.js" />
     <Content Include="app\services\categoriesService.js" />
+    <Content Include="app\style\custom-style.css" />
+    <Content Include="app\templates\modalTemplates\add-edit-order.html" />
+    <Content Include="app\templates\modalTemplates\add-edit-user.html" />
+    <Content Include="app\templates\modalTemplates\description-product.html" />
+    <Content Include="app\templates\modalTemplates\add-edit-product.html" />
     <Content Include="app\templates\modalTemplates\add-edit-category.html" />
     <Content Include="app\templates\products.html" />
     <Content Include="app\templates\categories.html" />
+    <Content Include="app\templates\orders.html" />
     <Content Include="app\templates\users.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\select.css" />
     <Content Include="Content\select.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -212,6 +245,11 @@
     <Content Include="Content\select.min.css.map" />
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\date.js.map" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -240,8 +278,6 @@
     <Content Include="Scripts\select.min.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\directives\" />
-    <Folder Include="app\styles\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

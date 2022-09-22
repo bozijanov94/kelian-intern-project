@@ -1,8 +1,20 @@
 ﻿app.service("categoryService", function ($http, SERVER_URL) {
 
-    this.getAll = function () {
-        return $http.get(SERVER_URL + "categories/getAll");
-    } 
+    this.getAll = function (currentPage, itemsPerPage, filter, orderAscend, orderBy) {
+        return $http({
+            method: "post",
+            url: SERVER_URL + "categories/getAll",
+            data: { "currentPage": currentPage, "itemsPerPage": itemsPerPage, "filter": filter, "orderAscend": orderAscend, "orderBy": orderBy }
+        });
+    }
+
+    this.getAllAvailable = function (search, status) {
+        return $http({
+            method: "post",
+            url: SERVER_URL + "categories/getAllAvailable",
+            data: { "Search": search, "Status": status }
+        });
+    }
 
     this.createCategory = function (model) {
         return $http({
@@ -16,7 +28,7 @@
         return $http({
             method: "post",
             url: SERVER_URL + "categories/delete",
-            data: id
+            data: { "Id": id }
         });
     }
 
@@ -31,8 +43,8 @@
     this.getById = function (id) {
         return $http({
             method: "post",
-            url: SERVER_URL + "categories/getbyid",
-            data: id
+            url: SERVER_URL + "categories/getById",
+            data: { "Id": id }
         });
     }
 })

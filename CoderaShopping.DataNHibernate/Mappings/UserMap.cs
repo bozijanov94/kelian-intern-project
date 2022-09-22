@@ -13,6 +13,22 @@ namespace CoderaShopping.DataNHibernate.Mappings
                 .Column("Name")
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Not.Nullable();
+
+            Map(x => x.Email)
+                .Column("Email")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Not.Nullable();
+
+            Map(x => x.Phone)
+                .Column("Phone")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Not.Nullable();
+
+            Map(x => x.UserType)
+                .Column("UserType")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .CustomType(typeof(UserType))
+                .Not.Nullable();
         }
     }
 }

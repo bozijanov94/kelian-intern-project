@@ -11,18 +11,19 @@ namespace CoderaShopping.Business.Services
 {
     public interface IProductService
     {
-        List<ProductViewModel> GetAll();
+        GridResult<ProductViewModel> GetAll(int currentPage, int itemsPerPage, ProductFilterModel filter, bool orderAscend, string orderBy);
+        List<ProductViewModel> GetAllSearch(string search);
         ProductViewModel GetById(Guid id);
-        ProductViewModel Create(ProductCreateViewModel model);
-        ProductViewModel Delete(Guid id);
-        ProductViewModel Update(ProductViewModel model);
+        void Create(ProductCreateViewModel model);
+        void Delete(Guid id);
+        void Update(ProductViewModel model);
     }
 
     public class ProductService : IProductService
     {
 
-        private readonly ICategoryRepository _categoryRepository;
         private readonly IProductRepository _productRepository;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public ProductService(IProductRepository productRepository, IUnitOfWork unitOfWork, 
@@ -33,12 +34,60 @@ namespace CoderaShopping.Business.Services
             _categoryRepository = categoryRepository;
         }
 
-        public List<ProductViewModel> GetAll()
+        public GridResult<ProductViewModel> GetAll(int currentPage, int itemsPerPage, ProductFilterModel filter, bool orderAscend, string orderBy)
         {
             _unitOfWork.BeginTransaction();
 
-            var products = _productRepository.GetAll().Select(x => x.MapToViewModel()).ToList();
-            
+            var products = _productRepository.GetAll();
+
+
+            #region filters
+            if (!string.IsNullOrWhiteSpace(filter.Name))
+            {
+                products = products.Where(c => c.Name.ToLower().Contains(filter.Name.ToLower()));
+            }
+            if (filter.Category != null)
+            {
+                products = products.Where(c => c.Category.Name.Equals(filter.Category.Name));
+            }
+            #endregion
+
+            #region sort
+            switch (orderBy)
+            {
+                case "Name":
+                    products = orderAscend ? products.OrderBy(c => c.Name) : products.OrderByDescending(c => c.Name);
+                    break;
+                case "Category":
+                    products = orderAscend ? products.OrderBy(c => c.Category.Name) : products.OrderByDescending(c => c.Category.Name);
+                    break;
+                default:
+                    throw new Exception(CustomMessages.Product.ERROR_COL_NAME(orderBy));
+            }
+            #endregion
+
+
+            var totalItems = products.Count();
+
+            products = products.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage);
+
+            var productsToDisplay = new GridResult<ProductViewModel>
+            {
+                Items = products.Select(x => x.MapToViewModel()).ToList(),
+                TotalItems = totalItems
+            };
+
+            _unitOfWork.Commit();
+
+            return productsToDisplay;
+        }
+
+        public List<ProductViewModel> GetAllSearch(string search)
+        {
+            _unitOfWork.BeginTransaction();
+
+            var products = _productRepository.GetAll(search).OrderByDescending(x => x.Name).Select(x => x.MapToViewModel()).ToList();
+
             _unitOfWork.Commit();
 
             return products;
@@ -55,7 +104,7 @@ namespace CoderaShopping.Business.Services
             return product;
         }
 
-        public ProductViewModel Create(ProductCreateViewModel model)
+        public void Create(ProductCreateViewModel model)
         {
             _unitOfWork.BeginTransaction();
 
@@ -69,24 +118,20 @@ namespace CoderaShopping.Business.Services
             }
 
             _unitOfWork.Commit();
-
-            return domainProduct.MapToViewModel();
         }
 
-        public ProductViewModel Delete(Guid id)
+        public void Delete(Guid id)
         {
             _unitOfWork.BeginTransaction();
 
-            var Product = _productRepository.GetById(id);
+            var product = _productRepository.GetById(id);
 
-            _productRepository.Delete(Product);
+            _productRepository.Delete(product);
 
             _unitOfWork.Commit();
-
-            return Product.MapToViewModel();
         }
 
-        public ProductViewModel Update(ProductViewModel model)
+        public void Update(ProductViewModel model)
         {
             var updateProduct = _productRepository.GetById(model.Id);
 
@@ -104,8 +149,6 @@ namespace CoderaShopping.Business.Services
             _productRepository.Update(updateProduct);
 
             _unitOfWork.Commit();
-
-            return updateProduct.MapToViewModel();
         }
     }
 }

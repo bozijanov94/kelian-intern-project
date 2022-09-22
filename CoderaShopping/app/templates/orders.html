@@ -1,0 +1,54 @@
+﻿<div ng-if="errorMessage" class="alert alert-danger">
+    <span>{{ errorMessage }}</span>
+</div>
+
+<div class="row">
+    <div class="col-lg-2">
+        <span>Customer Name:</span>
+        <customer-directive model="filter.Customer"></customer-directive>
+    </div>
+    <div class="col-lg-2">
+        <span>Product:</span>
+        <product-directive model="filter.Product"></product-directive>
+    </div>
+    <div class="col-lg-2">
+        <br />
+        <button type="button" class="btn btn-primary" ng-click="loadUsers()">Filter</button>
+    </div>
+    <div class="pull-right">
+        <br />
+        <button type="button" class="btn btn-primary" ng-click="addOrder()">Add new order</button>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-lg-3 pointer" ng-click="orderChange('Customer')">Customer<i class="fa pull-right" ng-class="{'fa-chevron-up':orderAscend, 'fa-chevron-down':!orderAscend}" ng-if="orderBy == 'Customer'"></i></th>
+                <th class="col-lg-3 pointer" ng-click="orderChange('Product')">Product<i class="fa pull-right" ng-class="{'fa-chevron-up':orderAscend, 'fa-chevron-down':!orderAscend}" ng-if="orderBy == 'Product'"></i></th>
+                <th class="col-lg-2 pointer" ng-click="orderChange('Quantity')">Quantity<i class="fa pull-right" ng-class="{'fa-chevron-up':orderAscend, 'fa-chevron-down':!orderAscend}" ng-if="orderBy == 'Quantity'"></i></th>
+                <th class="col-lg-2 pointer" ng-click="orderChange('DateOrdered')">DateOrdered<i class="fa pull-right" ng-class="{'fa-chevron-up':orderAscend, 'fa-chevron-down':!orderAscend}" ng-if="orderBy == 'DateOrdered'"></i></th>
+                <th class="col-lg-2"></th>
+            </tr>
+        </thead>
+        <tr ng-repeat="order in orders">
+            <td>{{ order.Customer.Name}}</td>
+            <td>{{ order.Product.Name}}</td>
+            <td>{{ order.Quantity }}</td>
+            <td>{{ order.DateOrdered }}</td>
+            <td>
+                <button type="button" class="btn btn-primary btn-xs" ng-click="updateOrder(order.Id)">Edit</button> |
+                <delete-directive id="order.Id" on-delete="removeOrder(order.Id)" entity-type="order"></delete-directive>
+            </td>
+        </tr>
+    </table>
+    <div class="row">
+        <div class="col-lg-2">
+            <span>Display Amount:</span>
+            <amount-picker-directive model="itemsPerPage" load="loadOrders()"></amount-picker-directive>
+        </div>
+        <div class="pull-right">
+            <ul uib-pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="loadOrders()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+        </div>
+    </div>
+</div>

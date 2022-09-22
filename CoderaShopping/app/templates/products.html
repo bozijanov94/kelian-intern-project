@@ -1,16 +1,51 @@
-﻿<div ng-repeat="product in products">
-    <span>{{ product.Name }}</span>
-</div>
-
-
-<div ng-if="newProductModel">
-    <span>{{ newProductModel.Name }}</span>
-</div>
-
-<div ng-if="errorMessage">
+﻿<div ng-if="errorMessage" class="alert alert-danger">
     <span>{{ errorMessage }}</span>
 </div>
 
-<button type="button" ng-click="addProduct(product)">Add new product</button>
-
-<button type="button" ng-click="removeProduct(product)">Delete product</button>
+<div class="row">
+    <div class="col-lg-2">
+        <span>Name:</span>
+        <input type="text" class="form-control" ng-model="filter.Name" name="name" />
+    </div>
+    <div class="col-lg-2">
+        <span>Category Filter:</span>
+        <category-directive model="filter.Category"></category-directive>
+    </div>
+    <div class="col-lg-2">
+        <br />
+        <button type="button" class="btn btn-primary" ng-click="loadProducts()">Filter</button>
+    </div>
+    <div class="pull-right">
+        <button type="button" class="btn btn-primary" ng-click="addProduct()">Add new product</button>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-lg-3 pointer" ng-click="orderChange('Name')">Name<i class="fa pull-right" ng-class="{'fa-chevron-up':orderAscend, 'fa-chevron-down':!orderAscend}" ng-if="orderBy == 'Name'"></i></th>
+                <th class="col-lg-4">Description</th>
+                <th class="col-lg-3 pointer" ng-click="orderChange('Category')">Category<i class="fa pull-right" ng-class="{'fa-chevron-up':orderAscend, 'fa-chevron-down':!orderAscend}" ng-if="orderBy == 'Category'"></i></th>
+                <th class="col-lg-2"></th>
+            </tr>
+        </thead>
+        <tr ng-repeat="product in products">
+            <td>{{ product.Name }}</td>
+            <td><a class="pointer" ng-click="descModal(product.Description)">{{ descReduc(product.Description) }}</a></td>
+            <td>{{ product.Category.Name }}</td>
+            <td>
+                <button type="button" class="btn btn-primary btn-xs" ng-click="updateProduct(product.Id)">Edit</button> |
+                <delete-directive id="product.Id" on-delete="removeProduct(product.Id)" entity-type="product"></delete-directive>
+            </td>
+        </tr>
+    </table>
+    <div class="row">
+        <div class="col-lg-2">
+            <span>Display Amount:</span>
+            <amount-picker-directive model="itemsPerPage" load="loadProducts()"></amount-picker-directive>
+        </div>
+        <div class="pull-right">
+            <ul uib-pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="loadProducts()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+        </div>
+    </div>
+</div>

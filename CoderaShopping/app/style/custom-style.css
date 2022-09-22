@@ -1,0 +1,14 @@
+﻿.pointer {
+    cursor: pointer;
+}
+
+.desc-box {
+    min-width: 100%;
+    resize: none;
+}
+
+ul.ui-select-choices {
+    height: auto;
+    max-height: 200px !important;
+    overflow-x: hidden;
+}

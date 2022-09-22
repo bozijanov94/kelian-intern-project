@@ -12,6 +12,8 @@ namespace CoderaShopping.Business.Mappers
             var viewModel = new CategoryViewModel();
             viewModel.Id = category.Id;
             viewModel.Name = category.Name;
+            viewModel.Status = category.Status;
+            viewModel.IsDefault = category.IsDefault;
             viewModel.Products = category.Products.Select(x => x.MapToLookupViewModel()).ToList();
 
             return viewModel;

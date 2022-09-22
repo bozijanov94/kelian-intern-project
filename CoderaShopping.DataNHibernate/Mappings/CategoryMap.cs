@@ -14,6 +14,16 @@ namespace CoderaShopping.DataNHibernate.Mappings
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Not.Nullable();
 
+            Map(x => x.Status)
+                .Column("Status")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Not.Nullable();
+
+            Map(x => x.IsDefault)
+                .Column("IsDefault")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Not.Nullable();
+
             HasMany(x => x.Products)
                 .KeyColumn("CategoryId")
                 .Access.CamelCaseField(Prefix.Underscore)

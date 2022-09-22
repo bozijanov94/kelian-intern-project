@@ -1,0 +1,39 @@
+﻿<form name="productForm">
+    <div class="modal-header">
+        <h3>{{ modalState }}</h3>
+    </div>
+
+    <div class="modal-body">
+        <div ng-if="errorMessages && errorMessages.length" class="alert alert-danger">
+            Please correct the following errors:
+            <ul>
+                <li ng-repeat="error in errorMessages">{{ error }}</li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <span>Name<span class="text-danger">*</span></span>
+                <br />
+                <input class="form-control" type="text" ng-model="product.Name" name="name" required />
+            </div>
+            <div class="col-sm-6">
+                <span>Category<span class="text-danger">*</span></span>
+                <category-directive model="product.Category" status="true" preselect-default="true"></category-directive>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <span>Description</span>
+                <br />
+                <textarea rows="5" class="form-control desc-box" ng-model="product.Description" name="status" />
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="col-sm-12">
+            <button class="btn btn-primary" ng-click="submit(productForm)"> Submit </button>
+            <button class="btn btn-secondary" ng-click="cancel()"> Cancel </button>
+        </div>
+    </div>
+</form>

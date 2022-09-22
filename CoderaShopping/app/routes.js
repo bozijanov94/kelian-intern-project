@@ -22,5 +22,12 @@
             controller: "usersCtrl"
         });   
 
+    $stateProvider.state('orders',
+        {
+            url: "/orders",
+            templateUrl: "/app/templates/orders.html",
+            controller: "ordersCtrl"
+        });
+
     $urlRouterProvider.otherwise("/");
 });

@@ -1,15 +1,62 @@
-﻿<div ng-repeat="category in categories">
-    <span>{{ category.Name }}</span>
-</div>
-
-<div ng-if="newCategoryModel">
-    <span>{{ newCategoryModel.Name }}</span>
-</div>
-
-<div ng-if="errorMessage">
+﻿<div ng-if="errorMessage" class="alert alert-danger">
     <span>{{ errorMessage }}</span>
 </div>
 
-<button type="button" ng-click="addCategory()">Add new category</button>
-
-<button type="button" ng-click="removeCategory(id)">Delete Category</button>
+<div class="row">
+    <div class="col-lg-2">
+        <span>Name:</span>
+        <input type="text" class="form-control" ng-model="filter.Name" name="name" />
+    </div>
+    <div class="col-lg-2">
+        <span>Status Filter:</span>
+        <status-directive model="filter.Status"></status-directive>
+    </div>
+    <div class="col-lg-2">
+        <span>Default Filter:</span>
+        <default-directive model="filter.IsDefault"></default-directive>
+    </div>
+    <div class="col-lg-2">
+        <br />
+        <button type="button" class="btn btn-primary" ng-click="loadCategories()">Filter</button>
+    </div>
+    <div class="pull-right">
+        <br />
+        <button type="button" class="btn btn-primary" ng-click="addCategory()">Add new category</button>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-lg-4 pointer" ng-click="orderChange('Name')">Name<i class="fa pull-right" ng-class="{'fa-chevron-up':orderAscend, 'fa-chevron-down':!orderAscend}" ng-if="orderBy == 'Name'"></i></th>
+                <th class="col-lg-3 pointer" ng-click="orderChange('Status')">Status<i class="fa pull-right" ng-class="{'fa-chevron-up':orderAscend, 'fa-chevron-down':!orderAscend}" ng-if="orderBy == 'Status'"></i></th>
+                <th class="col-lg-3 pointer" ng-click="orderChange('IsDefault')">Default<i class="fa pull-right" ng-class="{'fa-chevron-up':orderAscend, 'fa-chevron-down':!orderAscend}" ng-if="orderBy == 'IsDefault'"></i></th>
+                <th class="col-lg-2"></th>
+            </tr>
+        </thead>
+        <tr ng-repeat="category in categories">
+            <td>{{ category.Name }}</td>
+            <td>
+                <span class="label label-success" ng-if="category.Status">Active</span>
+                <span class="label label-danger" ng-if="!category.Status">Inactive</span>
+            </td>
+            <td>
+                <span class="label label-success" ng-if="category.IsDefault">Yes</span>
+                <span class="label label-danger" ng-if="!category.IsDefault">No</span>
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary btn-xs" ng-click="updateCategory(category.Id)">Edit</button> |
+                <delete-directive id="category.Id" on-delete="removeCategory(category.Id)" entity-type="category"></delete-directive>
+            </td>
+        </tr>
+    </table>
+    <div class="row">
+        <div class="col-lg-2">
+            <span>Display Amount:</span>
+            <amount-picker-directive model="itemsPerPage" load="loadCategories()"></amount-picker-directive>
+        </div>
+        <div class="pull-right">
+            <ul uib-pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="loadCategories()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+        </div>
+    </div>
+</div>

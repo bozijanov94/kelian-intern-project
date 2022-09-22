@@ -1,0 +1,43 @@
+﻿<form name="userForm">
+    <div class="modal-header">
+        <h3>{{ modalState }}</h3>
+    </div>
+    
+    <div class="modal-body">
+        <div class="row">
+            <div ng-if="errorMessage" class="alert alert-danger">
+                <span>{{ errorMessage }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <span>Name<span class="text-danger">*</span></span>
+                <br />
+                <input type="text" class="form-control" ng-model="user.Name" name="name" required />
+            </div>
+            <div class="col-lg-3">
+                <span>Email</span>
+                <br />
+                <input type="text" class="form-control" ng-model="user.Email" name="email" />
+            </div>
+            <div class="col-lg-3">
+                <span>Phone Number</span>
+                <br />
+                <input type="text" class="form-control" ng-model="user.Phone" name="phone" />
+            </div>
+            <div class="col-lg-3">
+                <span>User Type</span>
+                <br />
+                <input type="radio" ng-model="user.UserType" name="userType" value="Internal"/>Internal<br />
+                <input type="radio" ng-model="user.UserType" name="userType" value="External"/>External
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="col-lg-12">
+            <button class="btn btn-primary" ng-click="submit(userForm)"> Submit </button>
+            <button class="btn btn-secondary" ng-click="cancel()"> Cancel </button>
+        </div>
+    </div>
+</form>

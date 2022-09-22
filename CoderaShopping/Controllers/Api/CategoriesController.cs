@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using CoderaShopping.Business;
 using CoderaShopping.Business.Models;
 using CoderaShopping.Business.Services;
 
@@ -14,9 +15,15 @@ namespace CoderaShopping.Controllers.Api
             _categoryService = categoryService;
         }
 
-        public ActionResult GetAll()
+        public ActionResult GetAll(int currentPage, int itemsPerPage, CategoryFilterModel filter, bool orderAscend, string orderBy)
         {
-            var categories = _categoryService.GetAll();
+            var categories = _categoryService.GetAll(currentPage, itemsPerPage, filter, orderAscend, orderBy);
+            return Json(categories, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetAllAvailable(string search, bool? status = null)
+        {
+            var categories = _categoryService.GetAllAvailable(search, status);
             return Json(categories, JsonRequestBehavior.AllowGet);
         }
 
@@ -28,20 +35,20 @@ namespace CoderaShopping.Controllers.Api
 
         public ActionResult Create(CategoryCreateViewModel model)
         {
-            var category = _categoryService.Create(model);
-            return Json(category, JsonRequestBehavior.AllowGet);
+            _categoryService.Create(model);
+            return Json(CustomMessages.Category.SUCCESS_CREATE, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Delete(Guid id)
         {
-            var category = _categoryService.Delete(id);
-            return Json(category, JsonRequestBehavior.AllowGet);
+            _categoryService.Delete(id);
+            return Json(CustomMessages.Category.SUCCESS_DELETE, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Update(CategoryViewModel model)
         {
-            var category = _categoryService.Update(model);
-            return Json(category, JsonRequestBehavior.AllowGet);
+            _categoryService.Update(model);
+            return Json(CustomMessages.Category.SUCCESS_EDIT, JsonRequestBehavior.AllowGet);
         }
     }
 }

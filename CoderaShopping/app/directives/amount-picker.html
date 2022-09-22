@@ -1,0 +1,7 @@
+﻿<ui-select ng-model="model" ng-change="pickerOnChange($select.selected)" theme="bootstrap">
+    <ui-select-match placeholder="5">{{ $select.selected }}</ui-select-match>
+
+    <ui-select-choices repeat="choice in [5, 10, 25, 50, 100]">
+        {{ choice }}
+    </ui-select-choices>
+</ui-select>

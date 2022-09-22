@@ -1,0 +1,9 @@
+﻿<ui-select ng-model="model" ng-change="change(model)" theme="bootstrap">
+    <ui-select-match allow-clear="true">
+        <span ng-if="model.Name">{{ model.Name }}</span>
+    </ui-select-match>
+
+    <ui-select-choices repeat="default in Defaults" refresh="fetchData($select.search)">
+        {{ default.Name }}
+    </ui-select-choices>
+</ui-select>

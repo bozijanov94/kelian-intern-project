@@ -1,1 +1,54 @@
-﻿Users
+﻿<div ng-if="errorMessage" class="alert alert-danger">
+    <span>{{ errorMessage }}</span>
+</div>
+
+<div class="row">
+    <div class="col-lg-2">
+        <span>Name:</span>
+        <input type="text" class="form-control" ng-model="filter.Name" name="name" />
+    </div>
+    <div class="col-lg-2">
+        <span>UserType Filter:</span>
+        <user-type-directive model="filter.UserType"></user-type-directive>
+    </div>
+    <div class="col-lg-2">
+        <br />
+        <button type="button" class="btn btn-primary" ng-click="loadUsers()">Filter</button>
+    </div>
+    <div class="pull-right">
+        <br />
+        <button type="button" class="btn btn-primary" ng-click="addUser()">Add new user</button>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-lg-3 pointer" ng-click="orderChange('Name')">Name<i class="fa pull-right" ng-class="{'fa-chevron-up':orderAscend, 'fa-chevron-down':!orderAscend}" ng-if="orderBy == 'Name'"></i></th>
+                <th class="col-lg-3 pointer" ng-click="orderChange('Email')">Email<i class="fa pull-right" ng-class="{'fa-chevron-up':orderAscend, 'fa-chevron-down':!orderAscend}" ng-if="orderBy == 'Email'"></i></th>
+                <th class="col-lg-2 pointer">Phone Number</th>
+                <th class="col-lg-2 pointer" ng-click="orderChange('UserType')">UserType<i class="fa pull-right" ng-class="{'fa-chevron-up':orderAscend, 'fa-chevron-down':!orderAscend}" ng-if="orderBy == 'UserType'"></i></th>
+                <th class="col-lg-2"></th>
+            </tr>
+        </thead>
+        <tr ng-repeat="user in users">
+            <td>{{ user.Name }}</td>
+            <td>{{ user.Email }}</td>
+            <td>{{ user.Phone }}</td>
+            <td>{{ user.UserType == 0 ? "Internal" : "External" }}</td>
+            <td>
+                <button type="button" class="btn btn-primary btn-xs" ng-click="updateUser(user.Id)">Edit</button> |
+                <delete-directive id="user.Id" on-delete="removeUser(user.Id)" entity-type="user"></delete-directive>
+            </td>
+        </tr>
+    </table>
+    <div class="row">
+        <div class="col-lg-2">
+            <span>Display Amount:</span>
+            <amount-picker-directive model="itemsPerPage" load="loadUsers()"></amount-picker-directive>
+        </div>
+        <div class="pull-right">
+            <ul uib-pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="loadUsers()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+        </div>
+    </div>
+</div>

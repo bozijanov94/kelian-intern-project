@@ -10,6 +10,8 @@ namespace CoderaShopping.Domain
     {
         private Guid _id;
         private string _name;
+        private bool _status;
+        private bool _isDefault;
         private IList<Product> _products;
 
         protected Category()
@@ -17,9 +19,11 @@ namespace CoderaShopping.Domain
             _products = new List<Product>();
         }
 
-        public Category(string name) : this()
+        public Category(string name, bool status, bool isDefault) : this()
         {
             _name = name;
+            _status = status;
+            _isDefault = isDefault;
         }
 
         public virtual Guid Id
@@ -38,6 +42,18 @@ namespace CoderaShopping.Domain
         {
             get { return _products; }
             set { _products = value; }
+        }
+
+        public virtual bool Status
+        {
+            get { return _status; }
+            set { _status = value; }
+        }
+
+        public virtual bool IsDefault
+        {
+            get { return _isDefault; }
+            set { _isDefault = value; }
         }
     }
 }

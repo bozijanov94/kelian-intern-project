@@ -19,7 +19,7 @@
         }
         else {
             $scope.modalState = "Add category";
-        }       
+        }
 
         $scope.submit = function (form) {
 
@@ -33,7 +33,7 @@
                 //update the category
                 categoryService.updateCategory($scope.category)
                     .then(function (result) {
-                        $uibModalInstance.close(response);
+                        $uibModalInstance.close(result);
                     }, (function (error) {
                         $scope.errorMessage = error.data;
                     }))
@@ -42,7 +42,7 @@
                 //create new category
                 categoryService.createCategory($scope.category)
                     .then(function (result) {
-                        $uibModalInstance.close(response);
+                        $uibModalInstance.close(result);
                     }, (function (error) {
                         $scope.errorMessage = error.data;
                     }))
