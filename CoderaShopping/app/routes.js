@@ -29,5 +29,8 @@
             controller: "ordersCtrl"
         });
 
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/categories");
+})
+.run(function run($state) {
+    $state.go('categories');
 });

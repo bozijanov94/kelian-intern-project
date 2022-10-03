@@ -3,7 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title Some title</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/select.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="~/app/style/custom-style.css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -20,6 +23,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li><a ui-sref="categories">Categories</a></li>
+                    <li><a ui-sref="products">Products</a></li>
+                    <li><a ui-sref="users">Users</a></li>
+                    <li><a ui-sref="orders">Orders</a></li>
                 </ul>
             </div>
         </div>
